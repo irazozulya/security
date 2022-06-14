@@ -32,24 +32,36 @@ namespace SecurityLabs
 
 			var inputStr = convertHexToAscii(inputString);
 
-			tryFindXorKey(inputStr);
+			//tryFindXorKey(inputStr);
 
 			var key = 55;
+
+			Console.WriteLine(decodeXorCeasar(key, inputStr));
+
+			//Now try a repeating-key XOR cipher.
+			//E.g. it should take a string "hello world" and, given the key is "key",
+			//xor the first letter "h" with "k", then xor "e" with "e", then "l" with "y", and then xor next char "l" with 'k" again, then "o" with "e" and so on.
+			//You may use an index of coincidence, Hamming distance, Kasiski examination, statistical tests or whatever method you feel would show the best result.
 		}
 
 		private static void tryFindXorKey(string inputString)
 		{
 			for (int i = 100; i < 117; i++)
 			{
-				var value = string.Empty;
-
-				for (int j = 0; j < inputString.Length; j++)
-				{
-					value += Convert.ToChar(i ^ Convert.ToInt32(inputString[j]));
-				}
-
-				Console.WriteLine($"---------------------------------------{i}\n{value}\n");
+				Console.WriteLine($"---------------------------------------{i}\n{decodeXorCeasar(i, inputString)}\n");
 			}
+		}
+
+		private static string decodeXorCeasar(int key, string inputString)
+		{
+			var value = string.Empty;
+
+			for (int j = 0; j < inputString.Length; j++)
+			{
+				value += Convert.ToChar(key ^ Convert.ToInt32(inputString[j]));
+			}
+
+			return value;
 		}
 
 		private static string convertHexToAscii(string inputString)
