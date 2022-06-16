@@ -53,13 +53,13 @@ namespace SecurityLabs
 			var inputStrringAscii = System.Text.Encoding.ASCII.GetString(
 				Convert.FromBase64String(inputString));
 
-			//tryFindVigenereKeyLength(inputStrringAscii);
+			//TryFindVigenereKeyLength(inputStrringAscii);
 
-			//tryFindVigenereXorKey(inputStrringAscii);
+			//TryFindVigenereXorKey(inputStrringAscii);
 
 			//L0l - key
 
-			Console.WriteLine(decodeVigenereXorByKeys(76, 48, 108, inputStrringAscii));*/
+			Console.WriteLine(DecodeVigenereXorByKeys(76, 48, 108, inputStrringAscii));*/
 
 			//Write a code to attack some simple substitution cipher.
 			//To reduce the complexity of this one we will use only uppercase letters, so the keyspace is only 26!
@@ -116,7 +116,7 @@ namespace SecurityLabs
 
 		#region Line 2
 
-		private static void tryFindVigenereXorKey(string inputString)
+		public static void TryFindVigenereXorKey(string inputString)
 		{
 			for (int i = 0; i < 128; i++)
 			{
@@ -126,7 +126,7 @@ namespace SecurityLabs
 					{
 						var key = string.Concat(Convert.ToChar(i), Convert.ToChar(j), Convert.ToChar(k)/*, Convert.ToChar(h)*/);
 
-						var value = decodeVigenereXorByKeys(i, j, k, inputString);
+						var value = DecodeVigenereXorByKeys(i, j, k, inputString);
 						if (getELetterFrequency(value) >= _eLetterFrequency &&
 							getTLetterFrequency(value) >= _tLetterFrequency)
 						{
@@ -137,7 +137,7 @@ namespace SecurityLabs
 			}
 		}
 
-		private static string decodeVigenereXorByKeys(int i, int j, int k, string inputString)
+		public static string DecodeVigenereXorByKeys(int i, int j, int k, string inputString)
 		{
 			var value = string.Empty;
 			for (int f = 0; f < inputString.Length - 2; f += 3)
@@ -156,7 +156,7 @@ namespace SecurityLabs
 			return value;
 		}
 
-		private static void tryFindVigenereKeyLength(string inputString)
+		public static void TryFindVigenereKeyLength(string inputString)
 		{
 			var vigenereDict = new Dictionary<int, int>();
 

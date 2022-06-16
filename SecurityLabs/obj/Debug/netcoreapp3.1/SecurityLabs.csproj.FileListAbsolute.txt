@@ -20,7 +20,8 @@ C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\Securit
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.csprojAssemblyReference.cache
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.AssemblyInfoInputs.cache
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.AssemblyInfo.cs
-C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.csproj.CoreCompileInputs.cache
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.dll
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.pdb
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.genruntimeconfig.cache
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.csproj.CopyComplete

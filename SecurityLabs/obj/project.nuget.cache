@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "y3nmZvsepx1XvpK0lIWUJcV1D9Fb/asFwkU9Fa9L5cmsqvsRMdp4zXyJjsRNNuhqbS5tlOYOkpn4isr7CJM9tQ==",
+  "dgSpecHash": "2MjJlfiWntjr5SGPQ3DFYe4ZpqpheWxNrpdXWZuy3GwLVqa15Utl92g3MjoRBOLsbFMnM8jRJzt9s86/NWel0Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Zozulia.i\\Desktop\\security\\SecurityLabs\\SecurityLabs.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Zozulia.i\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }
