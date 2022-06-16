@@ -46,9 +46,9 @@ namespace SecurityLabs
 				var key = tryFindKeyByTwoCiphers(lines[2], lines[i]);
 				Console.WriteLine(tryFindKeyByTwoCiphers("the ", key));
 			}*/
-
+			Console.WriteLine("///" + tryFindKeyByTwoCiphers(lines[18], "Nb»Ä\b[=ã#") + "/"); ;
 			var length = lines.Min(l => l.Length);
-			var possibleKeys = new Dictionary<int, char>();
+			var possibleKeys = new Dictionary<int, List<char>>();
 
 			for (int i = 0; i < lines.Count; i++)
 			{
@@ -65,27 +65,52 @@ namespace SecurityLabs
 							continue;
 						}
 
+						if (!possibleKeys.TryGetValue(k, out var chars))
+						{
+							chars = new List<char>();
+							possibleKeys.Add(k, chars);
+						}
 
-						possibleKeys[k] = Convert.ToChar(line1[k] ^ ' ');
+						chars.Add(Convert.ToChar(line1[k] ^ ' '));
 					}
 				}
 			}
 
-			var keyStart = tryFindKeyByTwoCiphers(lines[2].Substring(0, 4), "the ");
-			foreach (var line in lines)
-			{
-				var newLine = tryFindKeyByTwoCiphers(line.Substring(0, 4), keyStart);
+			var keyStart = "Nb»Ä\b[=ã#";
+			var line = lines[18];
 
-				for (int k = 4; k < length; k++)
+			var newLines = new Dictionary<string, string>
+			{
+				{ keyStart, tryFindKeyByTwoCiphers(line.Substring(0, 9), keyStart)}
+			};
+
+			for (int k = 9; k < 9; k++)
+			{
+				var currChar = line[k];
+
+				if (!possibleKeys.TryGetValue(k, out var keyChars))
 				{
-					if (!possibleKeys.TryGetValue(k, out var keyChar))
-					{
-						newLine += line[k];
-					}
-					newLine += Convert.ToChar(line[k] ^ keyChar);
+					newLines = newLines.ToDictionary(p => p.Key + '1', p=> p.Value + ' ');
 				}
 
-				Console.WriteLine(newLine);
+				var newLinesToSelect = newLines.ToDictionary(p => p.Key, p => p.Value);
+				newLines = new Dictionary<string, string>();
+
+				foreach (var pair in newLinesToSelect)
+				{
+					foreach (var keyChar in keyChars)
+					{
+						var newKey = pair.Key + keyChar;
+						var str = pair.Value + Convert.ToChar(currChar ^ keyChar);
+
+						newLines[newKey] = str;
+					}
+				}
+			}
+
+			foreach (var newLine in newLines)
+			{
+				Console.WriteLine($"{newLine.Key} {newLine.Value}");
 			}
 		}
 
