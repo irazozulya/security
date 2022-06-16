@@ -41,13 +41,13 @@ namespace SecurityLabs
 
 			Task1.TryFindVigenereKeyLength(str);*/
 
-			/*for (int i = 0; i < lines.Count; i++)
+			for (int i = 0; i < lines.Count; i++)
 			{
-				var key = tryFindKeyByTwoCiphers(lines[2], lines[i]);
-				Console.WriteLine(tryFindKeyByTwoCiphers("the ", key));
-			}*/
-			Console.WriteLine("///" + tryFindKeyByTwoCiphers(lines[18], "Nb»Ä\b[=ã#") + "/"); ;
-			var length = lines.Min(l => l.Length);
+				var key = tryFindKeyByTwoCiphers(lines[18], "and lose ");//The last row starts with "and lose "
+				Console.WriteLine(tryFindKeyByTwoCiphers(lines[i], key));
+			}
+
+			/*var length = lines.Min(l => l.Length);
 			var possibleKeys = new Dictionary<int, List<char>>();
 
 			for (int i = 0; i < lines.Count; i++)
@@ -111,7 +111,7 @@ namespace SecurityLabs
 			foreach (var newLine in newLines)
 			{
 				Console.WriteLine($"{newLine.Key} {newLine.Value}");
-			}
+			}*/
 		}
 
 		private static string tryFindKeyByTwoCiphers(string cipher1, string cipher2)
