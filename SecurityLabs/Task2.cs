@@ -43,11 +43,34 @@ namespace SecurityLabs
 
 			for (int i = 0; i < lines.Count; i++)
 			{
-				var key = tryFindKeyByTwoCiphers(lines[18], "and lose ");//The last row starts with "and lose "
+				var key = tryFindKeyByTwoCiphers(lines[0], "for who would bear the whips and scorns of time");
 				Console.WriteLine(tryFindKeyByTwoCiphers(lines[i], key));
 			}
+			//The 18'th row starts with "and lose "
+			//The 17'th row starts with "with this "
+			//The 4'th row starts with "that patient"
+			//The 13'th row starts with "thus conscience "
+			//The 12'th row starts with "than fly to others "
+			//Googled the first phrase - "for who would bear the whips and scorns of time"
+		}
 
-			/*var length = lines.Min(l => l.Length);
+		private static string tryFindKeyByTwoCiphers(string cipher1, string cipher2)
+		{
+			var length = Math.Min(cipher1.Length, cipher2.Length);
+
+			var key = string.Empty;
+
+			for (int i = 0; i < length; i++)
+			{
+				key += Convert.ToChar(cipher1[i] ^ cipher2[i]);
+			}
+
+			return key;
+		}
+
+		private static void tryFindKeyByCiphers(List<string> lines)
+		{
+			var length = lines.Min(l => l.Length);
 			var possibleKeys = new Dictionary<int, List<char>>();
 
 			for (int i = 0; i < lines.Count; i++)
@@ -90,7 +113,7 @@ namespace SecurityLabs
 
 				if (!possibleKeys.TryGetValue(k, out var keyChars))
 				{
-					newLines = newLines.ToDictionary(p => p.Key + '1', p=> p.Value + ' ');
+					newLines = newLines.ToDictionary(p => p.Key + '1', p => p.Value + ' ');
 				}
 
 				var newLinesToSelect = newLines.ToDictionary(p => p.Key, p => p.Value);
@@ -111,83 +134,7 @@ namespace SecurityLabs
 			foreach (var newLine in newLines)
 			{
 				Console.WriteLine($"{newLine.Key} {newLine.Value}");
-			}*/
-		}
-
-		private static string tryFindKeyByTwoCiphers(string cipher1, string cipher2)
-		{
-			var length = Math.Min(cipher1.Length, cipher2.Length);
-
-			var key = string.Empty;
-
-			for (int i = 0; i < length; i++)
-			{
-				key += Convert.ToChar(cipher1[i] ^ cipher2[i]);
 			}
-
-			return key;
-		}
-
-		private static string tryFindKeyByCiphers(List<List<int>> ciphers)
-		{
-			var cipher = ciphers.First();
-			var length = cipher.Count();
-
-			var values = new Dictionary<int, List<int>>();
-
-			for (int i = 0; i < length; i++)
-			{
-				var keys = new List<int>();
-				for (int j = 0; j < 256; j++)
-				{
-					var decodedValues = ciphers.Select(c => c[i] ^ j);
-					
-					if (decodedValues.Any(d => d > 127 || d < 32))
-					{
-						continue;
-					}
-
-					keys.Add(j);
-				}
-
-				values.Add(i, keys);
-			}
-
-			var h = values[0].ToDictionary(p => Convert.ToChar(p).ToString(), p => Convert.ToChar(p).ToString());
-
-			foreach (var pair in values)
-			{
-				if (pair.Key == 0 || pair.Key > 4)
-				{
-					continue;
-				}
-
-				var k = h.ToDictionary(p => p.Key, p => p.Value);
-				h = new Dictionary<string, string>();
-
-				foreach (var kp in k)
-				{
-					foreach (var key in pair.Value)
-					{
-						if (kp.Value.All(c => Convert.ToInt32(c) < 65 || Convert.ToInt32(c) > 122))
-						{
-							continue;
-						}
-
-						var newKey = kp.Key + Convert.ToChar(key);
-						var str = kp.Value + Convert.ToChar(cipher[pair.Key] ^ key);
-
-						h.Add(newKey, str);
-					}
-				}
-			}
-
-			foreach (var pair in h)
-			{
-				Console.WriteLine($"{pair.Key} - {pair.Value}");
-			}
-
-			return string.Empty;
 		}
 
 		public static List<int> ConvertHexToAscii(string inputString)
