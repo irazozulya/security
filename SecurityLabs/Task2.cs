@@ -31,9 +31,9 @@ namespace SecurityLabs
 
 		public static void Exec()
 		{
-			var lines = _lines.Select(l => ConvertHexToAscii(l)).ToList();
+			var lines = _lines.Select(l => Task1.ConvertHexToAscii(l)).ToList();
 
-			var linesForDecoding = lines.OrderBy(l => l.Count).ToList();
+			//var linesForDecoding = lines.OrderBy(l => l.Length).ToList();
 
 			/*var minLength = linesForDecoding[0].Length;
 
@@ -41,7 +41,66 @@ namespace SecurityLabs
 
 			Task1.TryFindVigenereKeyLength(str);*/
 
-			var key = tryFindKeyByCiphers(linesForDecoding); //Really bad idea
+			/*for (int i = 0; i < lines.Count; i++)
+			{
+				var key = tryFindKeyByTwoCiphers(lines[2], lines[i]);
+				Console.WriteLine(tryFindKeyByTwoCiphers("the ", key));
+			}*/
+
+			var length = lines.Min(l => l.Length);
+			var possibleKeys = new Dictionary<int, char>();
+
+			for (int i = 0; i < lines.Count; i++)
+			{
+				var line1 = lines[i];
+
+				for (int j = 0; j < lines.Count; j++)
+				{
+					var line2 = lines[j];
+
+					for (int k = 4; k < length; k++)
+					{
+						if (line1[k] != line2[k])
+						{
+							continue;
+						}
+
+
+						possibleKeys[k] = Convert.ToChar(line1[k] ^ ' ');
+					}
+				}
+			}
+
+			var keyStart = tryFindKeyByTwoCiphers(lines[2].Substring(0, 4), "the ");
+			foreach (var line in lines)
+			{
+				var newLine = tryFindKeyByTwoCiphers(line.Substring(0, 4), keyStart);
+
+				for (int k = 4; k < length; k++)
+				{
+					if (!possibleKeys.TryGetValue(k, out var keyChar))
+					{
+						newLine += line[k];
+					}
+					newLine += Convert.ToChar(line[k] ^ keyChar);
+				}
+
+				Console.WriteLine(newLine);
+			}
+		}
+
+		private static string tryFindKeyByTwoCiphers(string cipher1, string cipher2)
+		{
+			var length = Math.Min(cipher1.Length, cipher2.Length);
+
+			var key = string.Empty;
+
+			for (int i = 0; i < length; i++)
+			{
+				key += Convert.ToChar(cipher1[i] ^ cipher2[i]);
+			}
+
+			return key;
 		}
 
 		private static string tryFindKeyByCiphers(List<List<int>> ciphers)
