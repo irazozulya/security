@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SecurityLabs
@@ -30,7 +31,8 @@ namespace SecurityLabs
 
 		public static void Exec()
 		{
-			Task1.TryFindVigenereKeyLength(_lines.First());
+			var inputStringAscii = Task1.ConvertHexToAscii(_lines.First());
+			Task1.TryFindVigenereKeyLength(inputStringAscii);
 		}
 	}
 }

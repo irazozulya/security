@@ -25,3 +25,4 @@ C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\Securit
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.genruntimeconfig.cache
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.csproj.CopyComplete
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.csproj.CoreCompileInputs.cache
