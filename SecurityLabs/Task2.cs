@@ -31,8 +31,15 @@ namespace SecurityLabs
 
 		public static void Exec()
 		{
-			var inputStringAscii = Task1.ConvertHexToAscii(_lines.First());
-			Task1.TryFindVigenereKeyLength(inputStringAscii);
+			var lines = _lines.Select(l => Task1.ConvertHexToAscii(l)).ToList();
+
+			var linesForDecoding = lines.OrderBy(l => l.Length).ToList();
+
+			var minLength = linesForDecoding[0].Length;
+
+			var str = string.Join("", lines.Select(l => l.Substring(0, minLength)));
+
+			Task1.TryFindVigenereKeyLength(str);
 		}
 	}
 }
