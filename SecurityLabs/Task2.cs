@@ -31,15 +31,92 @@ namespace SecurityLabs
 
 		public static void Exec()
 		{
-			var lines = _lines.Select(l => Task1.ConvertHexToAscii(l)).ToList();
+			var lines = _lines.Select(l => ConvertHexToAscii(l)).ToList();
 
-			var linesForDecoding = lines.OrderBy(l => l.Length).ToList();
+			var linesForDecoding = lines.OrderBy(l => l.Count).ToList();
 
-			var minLength = linesForDecoding[0].Length;
+			/*var minLength = linesForDecoding[0].Length;
 
 			var str = string.Join("", lines.Select(l => l.Substring(0, minLength)));
 
-			Task1.TryFindVigenereKeyLength(str);
+			Task1.TryFindVigenereKeyLength(str);*/
+
+			var key = tryFindKeyByCiphers(linesForDecoding); //Really bad idea
+		}
+
+		private static string tryFindKeyByCiphers(List<List<int>> ciphers)
+		{
+			var cipher = ciphers.First();
+			var length = cipher.Count();
+
+			var values = new Dictionary<int, List<int>>();
+
+			for (int i = 0; i < length; i++)
+			{
+				var keys = new List<int>();
+				for (int j = 0; j < 256; j++)
+				{
+					var decodedValues = ciphers.Select(c => c[i] ^ j);
+					
+					if (decodedValues.Any(d => d > 127 || d < 32))
+					{
+						continue;
+					}
+
+					keys.Add(j);
+				}
+
+				values.Add(i, keys);
+			}
+
+			var h = values[0].ToDictionary(p => Convert.ToChar(p).ToString(), p => Convert.ToChar(p).ToString());
+
+			foreach (var pair in values)
+			{
+				if (pair.Key == 0 || pair.Key > 4)
+				{
+					continue;
+				}
+
+				var k = h.ToDictionary(p => p.Key, p => p.Value);
+				h = new Dictionary<string, string>();
+
+				foreach (var kp in k)
+				{
+					foreach (var key in pair.Value)
+					{
+						if (kp.Value.All(c => Convert.ToInt32(c) < 65 || Convert.ToInt32(c) > 122))
+						{
+							continue;
+						}
+
+						var newKey = kp.Key + Convert.ToChar(key);
+						var str = kp.Value + Convert.ToChar(cipher[pair.Key] ^ key);
+
+						h.Add(newKey, str);
+					}
+				}
+			}
+
+			foreach (var pair in h)
+			{
+				Console.WriteLine($"{pair.Key} - {pair.Value}");
+			}
+
+			return string.Empty;
+		}
+
+		public static List<int> ConvertHexToAscii(string inputString)
+		{
+			var ascii = new List<int>();
+
+			for (int i = 0; i < inputString.Length; i += 2)
+			{
+				var hs = inputString.Substring(i, 2);
+				ascii.Add(Convert.ToInt32(hs, 16));
+			}
+
+			return ascii;
 		}
 	}
 }
