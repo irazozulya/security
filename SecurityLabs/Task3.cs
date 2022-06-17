@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -9,6 +10,10 @@ namespace SecurityLabs
 {
 	public static class Task3
 	{
+		private static int _accountCode = 5100;
+
+		private static double _a, _c;
+
 		public static void Exec()
 		{
 			getLcgNextNumber();
@@ -16,49 +21,76 @@ namespace SecurityLabs
 
 		private static void getLcgNextNumber()
 		{
-			var account = JsonConvert.DeserializeObject<Account>(CreateNewAccount());
+			/*var account = JsonConvert.DeserializeObject<Account>(CreateNewAccount());
 
-			Console.WriteLine($"{account.Money}");
+			Console.WriteLine($"{account.Money}");*/
 
 			var response = JsonConvert.DeserializeObject<Response>(PostNewNumber(0));
+			
+			var firstElement = BitConverter.ToUInt32(BitConverter.GetBytes(response.RealNumber), 0); //Next(1);
 
-			Console.WriteLine($"{response.RealNumber} {response.Account.Money}");
+			response = JsonConvert.DeserializeObject<Response>(PostNewNumber(0));
 
-			/*var firstElement = -660036803; //Next(1);
-			var sec = 1593740152;
-			var secondElement = firstElement < sec ? sec : sec + Math.Pow(2, 32);//Next(firstElement);
-			var th = 430299255;
-			var thirdElement = sec < th ? th : th + Math.Pow(2, 32); //Next(secondElement);
+			var secondElement = BitConverter.ToUInt32(BitConverter.GetBytes(response.RealNumber), 0);
 
+			response = JsonConvert.DeserializeObject<Response>(PostNewNumber(0));
 
-			var c = (secondElement - firstElement * 0) % Math.Pow(2, 32);
-			Console.WriteLine($"{a} {c}");
+			var thirdElement = BitConverter.ToUInt32(BitConverter.GetBytes(response.RealNumber), 0);
 
-			Console.WriteLine($"{Next(th, 0, c)}");*/
+			setMultipliers(firstElement, secondElement, thirdElement);
+			Console.WriteLine($"{_a} {_c}");
+
+			/*var last = thirdElement;
+			for (int i = 0; i < 3; i++)
+			{
+				last = Next(last);
+				response = JsonConvert.DeserializeObject<Response>(PostNewNumber(last));
+
+				Console.WriteLine($"{response.Account.Money} {response.RealNumber} {last}");
+			}*/
 		}
 
-		private static double getMultiplier(int firstElement, int secondElement, int thirdElement)
+		private static void setMultipliers(uint firstElement, uint secondElement, uint thirdElement)
 		{
-			var a = ((double)(thirdElement - secondElement) / (secondElement - firstElement)) % Math.Pow(2, 32);
-			return 0;
+			_a = (thirdElement - secondElement) * moduleInversion(secondElement - firstElement) % Math.Pow(2, 32);
+
+			_c = (secondElement - firstElement * _a) % Math.Pow(2, 32);
 		}
 
-		public static int Next(double _last, double a, double c)
+		private static double moduleInversion(uint k)
 		{
-			_last = (a * _last + c) % Math.Pow(2, 32); // m is 2^32
-			Console.WriteLine(_last);
-			return (int)_last;
+			long a = k;
+			var n = (int)Math.Pow(2, 32);
+			long i = n, v = 0, d = 1;
+			while (a > 0)
+			{
+				long t = i / a, x = a;
+				a = i % x;
+				i = x;
+				x = d;
+				d = v - t * x;
+				v = x;
+			}
+			v %= n;
+			if (v < 0) v = (v + n) % n;
+			return v;
+		}
+
+		public static uint Next(uint last)
+		{
+			var next = (_a * (double)last + _c) % Math.Pow(2, 32); // m is 2^32
+			return (uint)next;
 		}
 
 		private static string CreateNewAccount()
 		{
-			var url = $"http://95.217.177.249/casino/createacc?id=55555";
+			var url = $"http://95.217.177.249/casino/createacc?id={_accountCode}";
 			return post(url);
 		}
 
-		private static string PostNewNumber(int number)
+		private static string PostNewNumber(uint number)
 		{
-			var url = $"http://95.217.177.249/casino/playLcg?id=55555&bet=1&number={number}";
+			var url = $"http://95.217.177.249/casino/playLcg?id={_accountCode}&bet=1&number={number}";
 			return post(url);
 		}
 
@@ -70,7 +102,7 @@ namespace SecurityLabs
 			}
 
 			var request = (HttpWebRequest)WebRequest.Create(url);
-			request.Method = "POST";
+			request.Method = "GET";
 			request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
 
 			HttpWebResponse response;
@@ -102,6 +134,13 @@ namespace SecurityLabs
 		{
 			[JsonProperty("money")]
 			public int Money { get; set; }
+		}
+
+		private struct ModuleInversionData
+		{
+			public long A { get; set; }
+
+			public long B { get; set; }
 		}
 	}
 }
