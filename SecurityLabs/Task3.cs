@@ -21,46 +21,46 @@ namespace SecurityLabs
 
 		private static void getLcgNextNumber()
 		{
-			/*var account = JsonConvert.DeserializeObject<Account>(CreateNewAccount());
+			var account = JsonConvert.DeserializeObject<Account>(CreateNewAccount());
 
-			Console.WriteLine($"{account.Money}");*/
+			Console.WriteLine($"{account.Money}");
 
 			var response = JsonConvert.DeserializeObject<Response>(PostNewNumber(0));
 			
-			var firstElement = BitConverter.ToUInt32(BitConverter.GetBytes(response.RealNumber), 0); //Next(1);
+			var firstElement = BitConverter.ToInt32(BitConverter.GetBytes(response.RealNumber), 0); //Next(1);
 
 			response = JsonConvert.DeserializeObject<Response>(PostNewNumber(0));
 
-			var secondElement = BitConverter.ToUInt32(BitConverter.GetBytes(response.RealNumber), 0);
+			var secondElement = BitConverter.ToInt32(BitConverter.GetBytes(response.RealNumber), 0);
 
 			response = JsonConvert.DeserializeObject<Response>(PostNewNumber(0));
 
-			var thirdElement = BitConverter.ToUInt32(BitConverter.GetBytes(response.RealNumber), 0);
+			var thirdElement = BitConverter.ToInt32(BitConverter.GetBytes(response.RealNumber), 0);
 
 			setMultipliers(firstElement, secondElement, thirdElement);
 			Console.WriteLine($"{_a} {_c}");
 
-			/*var last = thirdElement;
-			for (int i = 0; i < 3; i++)
+			var last = thirdElement;
+			for (int i = 0; i < 1000; i++)
 			{
 				last = Next(last);
-				response = JsonConvert.DeserializeObject<Response>(PostNewNumber(last));
-
-				Console.WriteLine($"{response.Account.Money} {response.RealNumber} {last}");
-			}*/
+				PostNewNumber(last);
+			}
 		}
 
-		private static void setMultipliers(uint firstElement, uint secondElement, uint thirdElement)
+		private static void setMultipliers(int firstElement, int secondElement, int thirdElement)
 		{
-			_a = (thirdElement - secondElement) * moduleInversion(secondElement - firstElement) % Math.Pow(2, 32);
+			var mod = Math.Pow(2, 32);
 
-			_c = (secondElement - firstElement * _a) % Math.Pow(2, 32);
+			_a = (thirdElement - secondElement) * moduleInversion(secondElement - firstElement) % mod;
+
+			_c = (secondElement - firstElement * _a) % mod;
 		}
 
-		private static double moduleInversion(uint k)
+		private static double moduleInversion(int k)
 		{
-			long a = k;
-			var n = (int)Math.Pow(2, 32);
+			var n = (long)Math.Pow(2, 32);
+			long a = (k + n) % n;
 			long i = n, v = 0, d = 1;
 			while (a > 0)
 			{
@@ -76,10 +76,10 @@ namespace SecurityLabs
 			return v;
 		}
 
-		public static uint Next(uint last)
+		public static int Next(int last)
 		{
-			var next = (_a * (double)last + _c) % Math.Pow(2, 32); // m is 2^32
-			return (uint)next;
+			var next = (_a * last + _c) % Math.Pow(2, 32); // m is 2^32
+			return (int)next;
 		}
 
 		private static string CreateNewAccount()
@@ -88,9 +88,9 @@ namespace SecurityLabs
 			return post(url);
 		}
 
-		private static string PostNewNumber(uint number)
+		private static string PostNewNumber(int number, int bet = 1)
 		{
-			var url = $"http://95.217.177.249/casino/playLcg?id={_accountCode}&bet=1&number={number}";
+			var url = $"http://95.217.177.249/casino/playLcg?id={_accountCode}&bet={bet}&number={number}";
 			return post(url);
 		}
 
