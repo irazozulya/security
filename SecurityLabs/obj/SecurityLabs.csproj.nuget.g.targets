@@ -3,4 +3,7 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)liphsoft.crypto.argon2\1.0.5\build\Liphsoft.Crypto.Argon2.targets" Condition="Exists('$(NuGetPackageRoot)liphsoft.crypto.argon2\1.0.5\build\Liphsoft.Crypto.Argon2.targets')" />
+  </ImportGroup>
 </Project>
