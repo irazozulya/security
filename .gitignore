@@ -16,3 +16,4 @@ Lab5/bin/*
 *.cache
 *.nupkg
 *.js
+*.dll

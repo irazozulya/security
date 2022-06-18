@@ -143,6 +143,7 @@ namespace Lab5.Controllers
 			switch (result)
 			{
 				case SignInStatus.Success:
+					//ModelState.AddModelError("PhoneNumber", PhoneNumbers.PhoneNumbersManager.GetPhoneNumber(model.Email));
 					return Redirect("https://localhost:44386/Help");
 				case SignInStatus.LockedOut:
 					return View("Lockout");
@@ -486,8 +487,6 @@ namespace Lab5.Controllers
 
 			base.Dispose(disposing);
 		}
-
-
 
 		private SignInStatus validSignIn(string userName, string password)
 		{
