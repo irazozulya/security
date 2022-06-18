@@ -1,14 +1,27 @@
 {
   "version": 2,
-  "dgSpecHash": "3aBP/2Er/MzqpaQl/o4nfgkBNA+joMUFmcD1MjWq76Up1bxgcGC2kU7Nrcu+crxyxSbQ8ooxA5lWL7MIOvH7sA==",
+  "dgSpecHash": "aWz+yeyNbPR5Fy40GVN6rPaEhP8ESmi0dopgoo73ZX0aaJpiaPbYiEsDBT45HoVcc8zOaxgpvYyGI+05qx7djA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Zozulia.i\\Desktop\\security\\SecurityLabs\\SecurityLabs.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Zozulia.i\\.nuget\\packages\\chilkat-x64\\9.5.0.90\\chilkat-x64.9.5.0.90.nupkg.sha512",
+    "C:\\Users\\Zozulia.i\\.nuget\\packages\\chilkatnativelib\\9.5.0.90\\chilkatnativelib.9.5.0.90.nupkg.sha512",
     "C:\\Users\\Zozulia.i\\.nuget\\packages\\isopoh.cryptography.argon2\\1.1.12\\isopoh.cryptography.argon2.1.1.12.nupkg.sha512",
     "C:\\Users\\Zozulia.i\\.nuget\\packages\\isopoh.cryptography.blake2b\\1.1.12\\isopoh.cryptography.blake2b.1.1.12.nupkg.sha512",
     "C:\\Users\\Zozulia.i\\.nuget\\packages\\isopoh.cryptography.securearray\\1.1.12\\isopoh.cryptography.securearray.1.1.12.nupkg.sha512",
     "C:\\Users\\Zozulia.i\\.nuget\\packages\\liphsoft.crypto.argon2\\1.0.5\\liphsoft.crypto.argon2.1.0.5.nupkg.sha512",
     "C:\\Users\\Zozulia.i\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'chilkat-x64 9.5.0.90' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "chilkat-x64",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

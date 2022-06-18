@@ -8,12 +8,66 @@
     ".NETCoreApp,Version=v3.1": {
       "SecurityLabs/1.0.0": {
         "dependencies": {
+          "ChilkatNativeLib": "9.5.0.90",
           "Isopoh.Cryptography.Argon2": "1.1.12",
           "Liphsoft.Crypto.Argon2": "1.0.5",
-          "Newtonsoft.Json": "13.0.1"
+          "Newtonsoft.Json": "13.0.1",
+          "chilkat-x64": "9.5.0.90"
         },
         "runtime": {
           "SecurityLabs.dll": {}
+        }
+      },
+      "chilkat-x64/9.5.0.90": {
+        "runtime": {
+          "lib/net461/ChilkatDotNet46.dll": {
+            "assemblyVersion": "9.5.0.90",
+            "fileVersion": "9.5.0.90"
+          }
+        }
+      },
+      "ChilkatNativeLib/9.5.0.90": {
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libchilkatDnCore-9_5_0.so": {
+            "rid": "linux-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-arm64/native/libchilkatDnCore-9_5_0.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-x64/native/libchilkatDnCore-9_5_0.so": {
+            "rid": "linux-musl-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libchilkatDnCore-9_5_0.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-arm64/native/libchilkatDnCore-9_5_0.dylib": {
+            "rid": "osx-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libchilkatDnCore-9_5_0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/chilkatDnCore-9_5_0.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/chilkatDnCore-9_5_0.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
         }
       },
       "Isopoh.Cryptography.Argon2/1.1.12": {
@@ -63,6 +117,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "chilkat-x64/9.5.0.90": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KVzBuR8LwRAZULwzr/cRY1t38IS17BVntYP/e8jLu28a10W1HMCS3Kv9g5D6TVske2qaa4JtBwMVaNokN8oZVQ==",
+      "path": "chilkat-x64/9.5.0.90",
+      "hashPath": "chilkat-x64.9.5.0.90.nupkg.sha512"
+    },
+    "ChilkatNativeLib/9.5.0.90": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uiWSTuCjT+BPCZmIc2kgeuHhSAldlmx4YX9pJcO9Mili39Pt4mcYgw4gHm9OIBAbII1/79DuwZolwv1oIdl5Yg==",
+      "path": "chilkatnativelib/9.5.0.90",
+      "hashPath": "chilkatnativelib.9.5.0.90.nupkg.sha512"
     },
     "Isopoh.Cryptography.Argon2/1.1.12": {
       "type": "package",

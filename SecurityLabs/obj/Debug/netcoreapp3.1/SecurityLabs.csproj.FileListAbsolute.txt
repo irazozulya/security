@@ -28,4 +28,13 @@ C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\Securit
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\Isopoh.Cryptography.Argon2.dll
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\Isopoh.Cryptography.Blake2b.dll
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\Isopoh.Cryptography.SecureArray.dll
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\runtimes\linux-arm\native\libchilkatDnCore-9_5_0.so
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\runtimes\linux-arm64\native\libchilkatDnCore-9_5_0.so
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\runtimes\linux-musl-x64\native\libchilkatDnCore-9_5_0.so
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libchilkatDnCore-9_5_0.so
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\runtimes\osx-arm64\native\libchilkatDnCore-9_5_0.dylib
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\libchilkatDnCore-9_5_0.dylib
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\chilkatDnCore-9_5_0.dll
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\chilkatDnCore-9_5_0.dll
 C:\Users\Zozulia.i\Desktop\security\SecurityLabs\obj\Debug\netcoreapp3.1\SecurityLabs.csproj.CoreCompileInputs.cache
+C:\Users\Zozulia.i\Desktop\security\SecurityLabs\bin\Debug\netcoreapp3.1\ChilkatDotNet46.dll
